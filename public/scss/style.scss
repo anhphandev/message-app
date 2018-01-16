@@ -1,0 +1,88 @@
+@import 'reset';
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 16px;
+    font-family: 'Quicksand', sans-serif;
+    .message-box {
+        box-shadow: 0 5px 5px 0 rgba(black, 0.5);
+        margin: 0 10px;
+        width: 250px;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        .message-title {
+            background: #07b;
+            color: #fff;
+            height: 30px;
+            line-height: 30px;
+            padding: 0 5px;
+        }
+        .message-list {
+            height: 250px;
+            overflow-y: scroll;
+            &::-webkit-scrollbar {
+                width: 5px;
+                &-track {
+                    background: transparent;
+                }
+                &-thumb {
+                    background: #07b;
+                }
+            }
+            li:not(:empty) {
+                background: #ecf0f1;
+                color: #000;
+                line-height: 20px;
+                padding: 5px;
+                display: inline-block;
+                margin: 10px;
+                max-width: calc(100% - 20px);
+                position: relative;
+                float: left;
+                clear: both;
+                word-wrap: break-word;
+                white-space: pre-wrap;
+                &::before {
+                    content: '';
+                    position: absolute;
+                    top: 50%;
+                    right: 100%;
+                    transform: translateY(-50%);
+                    border: 5px solid transparent;
+                    border-right-color: #ecf0f1;
+                    width: 0;
+                    height: 0;
+                }
+                &.your-message {
+                    background: #07b;
+                    color: #fff;
+                    float: right;
+                    &::before {
+                        left: 100%;
+                        border-right-color: unset;
+                        border-left-color: #07b;
+                    }
+                }
+            }
+        }
+        textarea {
+            vertical-align: middle;
+            resize: none;
+            height: 30px;
+            width: 100%;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            line-height: 30px;
+            padding: 0 5px;
+            font-family: 'Quicksand', sans-serif;
+            box-shadow: 0 -2px 2px 0 rgba(black, 0.2);
+        }
+        input[type=submit] {
+            display: none;
+        }
+    }
+}
