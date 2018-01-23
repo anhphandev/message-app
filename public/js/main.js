@@ -1,15 +1,6 @@
 'use strict';
 $(document).ready(function () {
     const socket = io.connect();
-    // Escape HTML
-    function escape(unsafe) {
-        return unsafe
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;");
-    }
     // Emoji List
     const emojiList = [
         [/\(y\)/, '&#x1F44D;'],
@@ -55,15 +46,15 @@ $(document).ready(function () {
         return false;
     });
     socket.on('sendMessage', function (msg) {
-        msg = escape(msg);
         msg = emojiReplace(msg);
-        $('.message-box .message-content').append($('<li>').html(msg));
-        $('.message-box .message-content').scrollTop($('.message-content')[0].scrollHeight);
+        $('.message-box .message-content')
+            .append($('<li>').html(msg))
+            .scrollTop($('.message-content')[0].scrollHeight);
     });
     socket.on('showMessage', function (msg) {
-        msg = escape(msg);
         msg = emojiReplace(msg);
-        $('.message-box .message-content').append($('<li>').addClass('your-message').html(msg));
-        $('.message-box .message-content').scrollTop($('.message-content')[0].scrollHeight);
+        $('.message-box .message-content')
+            .append($('<li>').addClass('your-message').html(msg))
+            .scrollTop($('.message-content')[0].scrollHeight);
     });
 });

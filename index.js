@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
+const escape = require('escape-html');
 const port = process.env.PORT || 3000;
 
 app.use(express.static('public'));
@@ -15,6 +16,7 @@ app.get('/', function (req, res) {
 io.on('connection', function (socket) {
     console.log('Connection: ' + socket.id);
     socket.on('sendMessage', function (msg) {
+        msg = escape(msg);
         socket.emit('showMessage', msg);
         socket.broadcast.emit('sendMessage', msg);
     });
